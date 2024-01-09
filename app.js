@@ -9,8 +9,8 @@
 // Event handling, user interaction is what starts the code execution.
 
 var taskInput=document.getElementById("new-task");//Add a new task.
-var addButton=document.getElementsByTagName("button")[0];//first button
-var incompleteTaskHolder=document.getElementById("incompleteTasks");//ul of #incompleteTasks
+var addButton=document.getElementById("add-button");//first button
+var incompleteTaskHolder=document.getElementById("incomplete-tasks");//ul of #incomplete-tasks
 var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
 
 
@@ -22,7 +22,7 @@ var createNewTaskElement=function(taskString){
     //input (checkbox)
     var checkBox=document.createElement("input");//checkbx
     //span
-    var span=document.createElement("span");//span
+    var span =document.createElement("span");//span
     //input (text)
     var editInput=document.createElement("input");//text
     //button.edit
@@ -33,17 +33,20 @@ var createNewTaskElement=function(taskString){
     var deleteButtonImg=document.createElement("img");//delete button image
 
     span.innerText=taskString;
-    span.className='task';
+    span.className="task task-name";
+    listItem.className="task-item"
 
     //Each elements, needs appending
     checkBox.type="checkbox";
+    checkBox.className="checkbox-input"
     editInput.type="text";
-    editInput.className="task";
+    editInput.className="task text-input";
 
     editButton.innerText="Edit"; //innerText encodes special characters, HTML does not.
-    editButton.className="edit";
+    editButton.className="button edit";
 
-    deleteButton.className="delete";
+    deleteButton.className="button delete";
+    deleteButtonImg.className="delete-img";
     deleteButtonImg.src='./remove.svg';
     deleteButton.appendChild(deleteButtonImg);
 
@@ -82,14 +85,13 @@ var editTask=function(){
 
     var listItem=this.parentNode;
 
-    var editInput=listItem.querySelector('input[type=text]');
-    var span=listItem.querySelector("span");
+    var editInput=listItem.querySelector(".text-input");
+    var span=listItem.querySelector(".task-name");
     var editBtn=listItem.querySelector(".edit");
     var containsClass=listItem.classList.contains("edit-mode");
-    //If class of the parent is .edit-mode
+    //If class of the parent is .editmode
     if(containsClass){
-
-        //switch to .edit-mode
+        //switch to .editmode
         //span becomes the inputs value.
         span.innerText=editInput.value;
         editBtn.innerText="Edit";
